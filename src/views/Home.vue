@@ -1,18 +1,28 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+    <div class="home">
+        <p>Spaces left: {{ spacesLeft }} out of {{ capacity }}</p>
+
+        <div>Capacity: {{ capacity }}</div>
+
+        <button @click="increaseCapacity()">increase capacity</button>
+
+        <ul>
+            <li
+                v-for="(name,i) in attending"
+                :key="i"
+            >{{ name }}</li>
+        </ul>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+    import useEventSpace from "@/use/event-space";
+    import useMapping from "@/use/mapping";
+    export default {
+        name: "Home",
+        setup() {
+            return { ...useMapping(), ...useEventSpace() };
+        }
 
-export default {
-  name: "Home",
-  components: {
-    HelloWorld
-  }
-};
+    };
 </script>
